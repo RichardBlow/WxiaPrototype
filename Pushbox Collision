@@ -1,0 +1,22 @@
+//In Pushbox's Collision: obj_pushbox event.
+
+// Oh someone's falling on someone else? Get away from each other!
+if ((obj_player.y<obj_floor.y-1) && (obj_player.vsp>0))
+{
+global.playerleft.hsp = -3;
+global.playerright.hsp = 3;
+}
+
+//In the pushbox's step event.
+
+var _speed = master.hsp_final;
+
+//Stops players from walking into each other. Always lets them walk away from each other.
+if place_meeting(x+_speed,y,obj_pushbox)
+{
+	with (obj_player)
+		{
+	if !input_check(back,player,0)
+	movespd = 0;
+	}
+}
